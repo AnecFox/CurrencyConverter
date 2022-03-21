@@ -11,13 +11,10 @@ import java.util.Arrays;
 
 public class MainWindow extends JFrame {
 
-    private final static String VERSION = "0.1.2";
+    private final static String VERSION = "0.1.3";
 
     private final JTextField textFieldValue = new JTextField("");
     private final JTextField textFieldResult = new JTextField("");
-
-    private final JRadioButton radioButtonDollarsToRubles = new JRadioButton("Доллары в рубли");
-    private final JRadioButton radioButtonRublesToDollars = new JRadioButton("Рубли в доллары");
 
     private final JButton buttonConvert = new JButton("Перевести");
     private final JButton buttonAbout = new JButton("О программе");
@@ -27,7 +24,7 @@ public class MainWindow extends JFrame {
     }
 
     private void initialize() {
-        setTitle("Конвертер валют");
+        setTitle("CurrencyConverter");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(512, 140);
         setMinimumSize(new Dimension(256, 128));
@@ -57,16 +54,10 @@ public class MainWindow extends JFrame {
         textFieldResult.setEditable(false);
         container.add(textFieldResult);
 
-        ButtonGroup group = new ButtonGroup();
-        group.add(radioButtonDollarsToRubles);
-        group.add(radioButtonRublesToDollars);
-
-        radioButtonDollarsToRubles.setSelected(true);
-
         String[] currencies = new String[]{
                 "Доллар США (USD)", "Евро (EUR)", "Казахский тенге (KZT)", "Китайский юань (CNY)",
                 "Румынский лей (RON)", "Российский рубль (RUB)", "Украинская гривна (UAH)",
-                "Японская иена (JPY)",
+                "Южнокорейская вона (KRW)", "Японская иена (JPY)",
         };
 
         JComboBox<String> comboBoxFirstCurrency = new JComboBox<>(currencies);
@@ -111,6 +102,8 @@ public class MainWindow extends JFrame {
                 } else if (firstSelectedCurrency.equals(currencies[6])) {
                     result = Uah.toRubles(Double.parseDouble(value));
                 } else if (firstSelectedCurrency.equals(currencies[7])) {
+                    result = Krw.toRubles(Double.parseDouble(value));
+                } else if (firstSelectedCurrency.equals(currencies[8])) {
                     result = Jpy.toRubles(Double.parseDouble(value));
                 }
 
@@ -127,6 +120,8 @@ public class MainWindow extends JFrame {
                 } else if (secondSelectedCurrency.equals(currencies[6])) {
                     result = Uah.fromRubles(result);
                 } else if (secondSelectedCurrency.equals(currencies[7])) {
+                    result = Krw.fromRubles(result);
+                } else if (secondSelectedCurrency.equals(currencies[8])) {
                     result = Jpy.fromRubles(result);
                 }
 
@@ -144,6 +139,8 @@ public class MainWindow extends JFrame {
                     } else if (firstSelectedCurrency.equals(currencies[6])) {
                         result = Uah.toRubles(Double.parseDouble(value));
                     } else if (firstSelectedCurrency.equals(currencies[7])) {
+                        result = Krw.toRubles(Double.parseDouble(value));
+                    } else if (firstSelectedCurrency.equals(currencies[8])) {
                         result = Jpy.toRubles(Double.parseDouble(value));
                     } else if (firstSelectedCurrency.equals(currencies[5])) {
                         result = Double.parseDouble(value);
@@ -164,6 +161,8 @@ public class MainWindow extends JFrame {
                     } else if (secondSelectedCurrency.equals(currencies[6])) {
                         result = Uah.fromRubles(Double.parseDouble(value));
                     } else if (secondSelectedCurrency.equals(currencies[7])) {
+                        result = Krw.fromRubles(Double.parseDouble(value));
+                    } else if (secondSelectedCurrency.equals(currencies[8])) {
                         result = Jpy.fromRubles(Double.parseDouble(value));
                     } else if (secondSelectedCurrency.equals(currencies[5])) {
                         result = Double.parseDouble(value);
