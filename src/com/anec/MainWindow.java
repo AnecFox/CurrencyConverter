@@ -195,8 +195,7 @@ public class MainWindow extends JFrame {
         buttonAbout.addActionListener(e -> JOptionPane.showMessageDialog(null,
                 "Эта программа предназначена для конвертации валюты.\n\n" +
                         "                                        Версия: " + VERSION + "\n\n" +
-                        "                                       Created by Anec\n" +
-                        "                                        Anec 2021‒2022", "О программе",
+                        "                                       Created by Anec", "О программе",
                 JOptionPane.PLAIN_MESSAGE));
         container.add(buttonAbout);
 
