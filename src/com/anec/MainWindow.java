@@ -11,10 +11,10 @@ import java.util.Arrays;
 
 public class MainWindow extends JFrame {
 
-    private final static String VERSION = "0.1.3";
+    private final static String VERSION = "0.1.4";
 
-    private final JTextField textFieldValue = new JTextField("");
-    private final JTextField textFieldResult = new JTextField("");
+    private final JTextField textFieldValue = new JTextField();
+    private final JTextField textFieldResult = new JTextField();
 
     private final JButton buttonConvert = new JButton("Перевести");
     private final JButton buttonAbout = new JButton("О программе");
@@ -55,16 +55,16 @@ public class MainWindow extends JFrame {
         container.add(textFieldResult);
 
         String[] currencies = new String[]{
-                "Доллар США (USD)", "Евро (EUR)", "Казахский тенге (KZT)", "Китайский юань (CNY)",
-                "Румынский лей (RON)", "Российский рубль (RUB)", "Украинская гривна (UAH)",
-                "Южнокорейская вона (KRW)", "Японская иена (JPY)",
+                "Болгарский лев (BGN)", "Доллар США (USD)", "Евро (EUR)", "Казахский тенге (KZT)",
+                "Китайский юань (CNY)", "Румынский лей (RON)", "Российский рубль (RUB)",
+                "Украинская гривна (UAH)", "Южнокорейская вона (KRW)", "Японская иена (JPY)",
         };
 
         JComboBox<String> comboBoxFirstCurrency = new JComboBox<>(currencies);
-        comboBoxFirstCurrency.setSelectedIndex(0);
+        comboBoxFirstCurrency.setSelectedIndex(1);
 
         JComboBox<String> comboBoxSecondCurrency = new JComboBox<>(currencies);
-        comboBoxSecondCurrency.setSelectedIndex(5);
+        comboBoxSecondCurrency.setSelectedIndex(6);
 
         container.add(comboBoxFirstCurrency);
         container.add(comboBoxSecondCurrency);
@@ -90,81 +90,89 @@ public class MainWindow extends JFrame {
                 }
 
                 if (firstSelectedCurrency.equals(currencies[0])) {
-                    result = Usd.toRubles(Double.parseDouble(value));
+                    result = Bgn.toRubles(Double.parseDouble(value));
                 } else if (firstSelectedCurrency.equals(currencies[1])) {
-                    result = Eur.toRubles(Double.parseDouble(value));
+                    result = Usd.toRubles(Double.parseDouble(value));
                 } else if (firstSelectedCurrency.equals(currencies[2])) {
-                    result = Kzt.toRubles(Double.parseDouble(value));
+                    result = Eur.toRubles(Double.parseDouble(value));
                 } else if (firstSelectedCurrency.equals(currencies[3])) {
-                    result = Cny.toRubles(Double.parseDouble(value));
+                    result = Kzt.toRubles(Double.parseDouble(value));
                 } else if (firstSelectedCurrency.equals(currencies[4])) {
+                    result = Cny.toRubles(Double.parseDouble(value));
+                } else if (firstSelectedCurrency.equals(currencies[5])) {
                     result = Ron.toRubles(Double.parseDouble(value));
-                } else if (firstSelectedCurrency.equals(currencies[6])) {
-                    result = Uah.toRubles(Double.parseDouble(value));
                 } else if (firstSelectedCurrency.equals(currencies[7])) {
-                    result = Krw.toRubles(Double.parseDouble(value));
+                    result = Uah.toRubles(Double.parseDouble(value));
                 } else if (firstSelectedCurrency.equals(currencies[8])) {
+                    result = Krw.toRubles(Double.parseDouble(value));
+                } else if (firstSelectedCurrency.equals(currencies[9])) {
                     result = Jpy.toRubles(Double.parseDouble(value));
                 }
 
                 if (secondSelectedCurrency.equals(currencies[0])) {
-                    result = Usd.fromRubles(result);
+                    result = Bgn.fromRubles(result);
                 } else if (secondSelectedCurrency.equals(currencies[1])) {
-                    result = Eur.fromRubles(result);
+                    result = Usd.fromRubles(result);
                 } else if (secondSelectedCurrency.equals(currencies[2])) {
-                    result = Kzt.fromRubles(result);
+                    result = Eur.fromRubles(result);
                 } else if (secondSelectedCurrency.equals(currencies[3])) {
-                    result = Cny.fromRubles(result);
+                    result = Kzt.fromRubles(result);
                 } else if (secondSelectedCurrency.equals(currencies[4])) {
+                    result = Cny.fromRubles(result);
+                } else if (secondSelectedCurrency.equals(currencies[5])) {
                     result = Ron.fromRubles(result);
-                } else if (secondSelectedCurrency.equals(currencies[6])) {
-                    result = Uah.fromRubles(result);
                 } else if (secondSelectedCurrency.equals(currencies[7])) {
-                    result = Krw.fromRubles(result);
+                    result = Uah.fromRubles(result);
                 } else if (secondSelectedCurrency.equals(currencies[8])) {
+                    result = Krw.fromRubles(result);
+                } else if (secondSelectedCurrency.equals(currencies[9])) {
                     result = Jpy.fromRubles(result);
                 }
 
-                if (secondSelectedCurrency.equals(currencies[5])) {
+                if (secondSelectedCurrency.equals(currencies[6])) {
                     if (firstSelectedCurrency.equals(currencies[0])) {
-                        result = Usd.toRubles(Double.parseDouble(value));
+                        result = Bgn.toRubles(Double.parseDouble(value));
                     } else if (firstSelectedCurrency.equals(currencies[1])) {
-                        result = Eur.toRubles(Double.parseDouble(value));
+                        result = Usd.toRubles(Double.parseDouble(value));
                     } else if (firstSelectedCurrency.equals(currencies[2])) {
-                        result = Kzt.toRubles(Double.parseDouble(value));
+                        result = Eur.toRubles(Double.parseDouble(value));
                     } else if (firstSelectedCurrency.equals(currencies[3])) {
-                        result = Cny.toRubles(Double.parseDouble(value));
+                        result = Kzt.toRubles(Double.parseDouble(value));
                     } else if (firstSelectedCurrency.equals(currencies[4])) {
-                        result = Ron.toRubles(Double.parseDouble(value));
-                    } else if (firstSelectedCurrency.equals(currencies[6])) {
-                        result = Uah.toRubles(Double.parseDouble(value));
-                    } else if (firstSelectedCurrency.equals(currencies[7])) {
-                        result = Krw.toRubles(Double.parseDouble(value));
-                    } else if (firstSelectedCurrency.equals(currencies[8])) {
-                        result = Jpy.toRubles(Double.parseDouble(value));
+                        result = Cny.toRubles(Double.parseDouble(value));
                     } else if (firstSelectedCurrency.equals(currencies[5])) {
+                        result = Ron.toRubles(Double.parseDouble(value));
+                    } else if (firstSelectedCurrency.equals(currencies[7])) {
+                        result = Uah.toRubles(Double.parseDouble(value));
+                    } else if (firstSelectedCurrency.equals(currencies[8])) {
+                        result = Krw.toRubles(Double.parseDouble(value));
+                    } else if (firstSelectedCurrency.equals(currencies[9])) {
+                        result = Jpy.toRubles(Double.parseDouble(value));
+                    } else if (firstSelectedCurrency.equals(currencies[6])) {
                         result = Double.parseDouble(value);
                     }
                 }
 
-                if (firstSelectedCurrency.equals(currencies[5])) {
+                if (firstSelectedCurrency.equals(currencies[6])) {
                     if (secondSelectedCurrency.equals(currencies[0])) {
-                        result = Usd.fromRubles(Double.parseDouble(value));
+                        result = Bgn.fromRubles(Double.parseDouble(value));
                     } else if (secondSelectedCurrency.equals(currencies[1])) {
-                        result = Eur.fromRubles(Double.parseDouble(value));
+                        result = Usd.fromRubles(Double.parseDouble(value));
                     } else if (secondSelectedCurrency.equals(currencies[2])) {
-                        result = Kzt.fromRubles(Double.parseDouble(value));
+                        result = Eur.fromRubles(Double.parseDouble(value));
                     } else if (secondSelectedCurrency.equals(currencies[3])) {
-                        result = Cny.fromRubles(Double.parseDouble(value));
+                        result = Kzt.fromRubles(Double.parseDouble(value));
                     } else if (secondSelectedCurrency.equals(currencies[4])) {
-                        result = Ron.fromRubles(Double.parseDouble(value));
-                    } else if (secondSelectedCurrency.equals(currencies[6])) {
-                        result = Uah.fromRubles(Double.parseDouble(value));
-                    } else if (secondSelectedCurrency.equals(currencies[7])) {
-                        result = Krw.fromRubles(Double.parseDouble(value));
-                    } else if (secondSelectedCurrency.equals(currencies[8])) {
-                        result = Jpy.fromRubles(Double.parseDouble(value));
+                        result = Cny.fromRubles(Double.parseDouble(value));
                     } else if (secondSelectedCurrency.equals(currencies[5])) {
+                        result = Ron.fromRubles(Double.parseDouble(value));
+                    } else if (secondSelectedCurrency.equals(currencies[7])) {
+                        result = Uah.fromRubles(Double.parseDouble(value));
+                    } else if (secondSelectedCurrency.equals(currencies[8])) {
+                        result = Krw.fromRubles(Double.parseDouble(value));
+                    } else if (secondSelectedCurrency.equals(currencies[9])) {
+                        result = Jpy.fromRubles(Double.parseDouble(value));
+                    } else if (secondSelectedCurrency.equals(currencies[6])) {
                         result = Double.parseDouble(value);
                     }
                 }
