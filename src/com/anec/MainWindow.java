@@ -1,21 +1,17 @@
 package com.anec;
 
-import com.anec.currency_converters.*;
+import com.anec.currencies.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.ConnectException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Arrays;
 
 public class MainWindow extends JFrame {
 
-    private final static String VERSION = "0.1.5";
+    private final static String VERSION = "0.1.6";
 
     private final JTextField textFieldValue = new JTextField();
     private final JTextField textFieldResult = new JTextField();
@@ -61,7 +57,7 @@ public class MainWindow extends JFrame {
         String[] currencies = new String[]{
                 "Болгарский лев (BGN)", "Доллар США (USD)", "Евро (EUR)", "Казахский тенге (KZT)",
                 "Китайский юань (CNY)", "Румынский лей (RON)", "Российский рубль (RUB)",
-                "Украинская гривна (UAH)", "Южнокорейская вона (KRW)", "Японская иена (JPY)",
+                "Украинская гривна (UAH)", "Южнокорейская вона (KRW)", "Японская иена (JPY)"
         };
 
         JComboBox<String> comboBoxFirstCurrency = new JComboBox<>(currencies);
@@ -76,7 +72,7 @@ public class MainWindow extends JFrame {
         String currencyRates = "";
 
         try {
-            currencyRates = getCurrencyRates();
+            currencyRates = Currency.getCurrencyRates();
         } catch (ConnectException e) {
             JOptionPane.showMessageDialog(null, "Возникла ошибка при получении курса валют",
                     getTitle(), JOptionPane.ERROR_MESSAGE);
@@ -96,102 +92,90 @@ public class MainWindow extends JFrame {
                 double result = 0;
 
                 try {
-                    String firstSelectedCurrency = "";
-                    String secondSelectedCurrency = "";
-
-                    for (String currency : currencies) {
-                        if (comboBoxFirstCurrency.getSelectedItem() == currency) {
-                            firstSelectedCurrency = currency;
-                        }
-                        if (comboBoxSecondCurrency.getSelectedItem() == currency) {
-                            secondSelectedCurrency = currency;
-                        }
-                    }
-
-                    if (firstSelectedCurrency.equals(currencies[0])) {
+                    if (Currency.isCurrencySelected(comboBoxFirstCurrency, "BGN")) {
                         result = Bgn.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[1])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "USD")) {
                         result = Usd.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[2])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "EUR")) {
                         result = Eur.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[3])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "KZT")) {
                         result = Kzt.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[4])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "CNY")) {
                         result = Cny.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[5])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RON")) {
                         result = Ron.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[7])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "UAH")) {
                         result = Uah.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[8])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "KRW")) {
                         result = Krw.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                    } else if (firstSelectedCurrency.equals(currencies[9])) {
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "JPY")) {
                         result = Jpy.toRubles(Double.parseDouble(value), finalCurrencyRates);
                     }
 
-                    if (secondSelectedCurrency.equals(currencies[0])) {
+                    if (Currency.isCurrencySelected(comboBoxSecondCurrency, "BGN")) {
                         result = Bgn.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[1])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "USD")) {
                         result = Usd.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[2])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "EUR")) {
                         result = Eur.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[3])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "KZT")) {
                         result = Kzt.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[4])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "CNY")) {
                         result = Cny.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[5])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "RON")) {
                         result = Ron.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[7])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "UAH")) {
                         result = Uah.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[8])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "KRW")) {
                         result = Krw.fromRubles(result, finalCurrencyRates);
-                    } else if (secondSelectedCurrency.equals(currencies[9])) {
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "JPY")) {
                         result = Jpy.fromRubles(result, finalCurrencyRates);
                     }
 
-                    if (secondSelectedCurrency.equals(currencies[6])) {
-                        if (firstSelectedCurrency.equals(currencies[0])) {
+                    if (Currency.isCurrencySelected(comboBoxSecondCurrency, "RUB")) {
+                        if (Currency.isCurrencySelected(comboBoxFirstCurrency, "BGN")) {
                             result = Bgn.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[1])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "USD")) {
                             result = Usd.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[2])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "EUR")) {
                             result = Eur.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[3])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "KZT")) {
                             result = Kzt.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[4])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "CNY")) {
                             result = Cny.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[5])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RON")) {
                             result = Ron.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[7])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "UAH")) {
                             result = Uah.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[8])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "KRW")) {
                             result = Krw.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[9])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "JPY")) {
                             result = Jpy.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (firstSelectedCurrency.equals(currencies[6])) {
+                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RUB")) {
                             result = Double.parseDouble(value);
                         }
                     }
 
-                    if (firstSelectedCurrency.equals(currencies[6])) {
-                        if (secondSelectedCurrency.equals(currencies[0])) {
+                    if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RUB")) {
+                        if (Currency.isCurrencySelected(comboBoxSecondCurrency, "BGN")) {
                             result = Bgn.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[1])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "USD")) {
                             result = Usd.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[2])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "EUR")) {
                             result = Eur.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[3])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "KZT")) {
                             result = Kzt.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[4])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "CNY")) {
                             result = Cny.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[5])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "RON")) {
                             result = Ron.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[7])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "UAH")) {
                             result = Uah.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[8])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "KRW")) {
                             result = Krw.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[9])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "JPY")) {
                             result = Jpy.fromRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (secondSelectedCurrency.equals(currencies[6])) {
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "RUB")) {
                             result = Double.parseDouble(value);
                         }
                     }
@@ -230,26 +214,5 @@ public class MainWindow extends JFrame {
         for (Component c : this.getComponents()) {
             SwingUtilities.updateComponentTreeUI(c);
         }
-    }
-
-    private String getCurrencyRates() throws ConnectException {
-        StringBuilder content = new StringBuilder();
-
-        try {
-            URL url = new URL("http://www.cbr.ru/scripts/XML_daily.asp");
-            URLConnection urlConnection = url.openConnection();
-
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-            String line;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-            bufferedReader.close();
-        } catch (Exception e) {
-            throw new ConnectException("Failed to get currency rates");
-        }
-        return content.toString();
     }
 }

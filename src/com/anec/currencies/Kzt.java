@@ -1,4 +1,4 @@
-package com.anec.currency_converters;
+package com.anec.currencies;
 
 public class Kzt {
 
