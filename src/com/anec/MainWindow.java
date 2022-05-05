@@ -132,30 +132,6 @@ public class MainWindow extends JFrame {
                         result = Jpy.fromRubles(result, finalCurrencyRates);
                     }
 
-                    if (Currency.isCurrencySelected(comboBoxSecondCurrency, "RUB")) {
-                        if (Currency.isCurrencySelected(comboBoxFirstCurrency, "BGN")) {
-                            result = Bgn.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "USD")) {
-                            result = Usd.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "EUR")) {
-                            result = Eur.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "KZT")) {
-                            result = Kzt.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "CNY")) {
-                            result = Cny.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RON")) {
-                            result = Ron.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "UAH")) {
-                            result = Uah.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "KRW")) {
-                            result = Krw.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "JPY")) {
-                            result = Jpy.toRubles(Double.parseDouble(value), finalCurrencyRates);
-                        } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RUB")) {
-                            result = Double.parseDouble(value);
-                        }
-                    }
-
                     if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RUB")) {
                         if (Currency.isCurrencySelected(comboBoxSecondCurrency, "BGN")) {
                             result = Bgn.fromRubles(Double.parseDouble(value), finalCurrencyRates);
