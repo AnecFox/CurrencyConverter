@@ -1,20 +1,19 @@
 package com.anec.currencies;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Kzt {
 
     private static double getRate(String currencyRates) {
-        int index = currencyRates.indexOf("<CharCode>KZT</CharCode>");
+        Pattern pattern = Pattern.compile("<Name>Казахстанских тенге</Name><Value>(.*?)</Value>");
+        Matcher matcher = pattern.matcher(currencyRates);
 
-        int indexOfStartKztRate = index + 85;
-        int indexOfEndKztRate = index + 91;
-
-        StringBuilder kztRate = new StringBuilder();
-
-        for (int i = indexOfStartKztRate; i <= indexOfEndKztRate; i++) {
-            kztRate.append(currencyRates.charAt(i));
+        if (!matcher.find()) {
+            System.err.println("Pattern is not valid!");
         }
 
-        return Double.parseDouble(String.valueOf(kztRate).replace(',', '.'));
+        return Double.parseDouble(matcher.group(1).replace(',', '.'));
     }
 
     public static double toRubles(double value, String currencyRates) {

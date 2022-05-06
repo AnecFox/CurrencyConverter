@@ -1,20 +1,19 @@
 package com.anec.currencies;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Eur {
 
     private static double getRate(String currencyRates) {
-        int index = currencyRates.indexOf("<CharCode>EUR</CharCode>");
+        Pattern pattern = Pattern.compile("<Name>Евро</Name><Value>(.*?)</Value>");
+        Matcher matcher = pattern.matcher(currencyRates);
 
-        int indexOfStartEurRate = index + 68;
-        int indexOfEndEurRate = index + 74;
-
-        StringBuilder eurRate = new StringBuilder();
-
-        for (int i = indexOfStartEurRate; i <= indexOfEndEurRate; i++) {
-            eurRate.append(currencyRates.charAt(i));
+        if (!matcher.find()) {
+            System.err.println("Pattern is not valid!");
         }
 
-        return Double.parseDouble(String.valueOf(eurRate).replace(',', '.'));
+        return Double.parseDouble(matcher.group(1).replace(',', '.'));
     }
 
     public static double toRubles(double value, String currencyRates) {

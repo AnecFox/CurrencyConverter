@@ -17,7 +17,7 @@ public class Currency {
             URL url = new URL("http://www.cbr.ru/scripts/XML_daily.asp");
             URLConnection urlConnection = url.openConnection();
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "windows-1251"));
 
             String line;
 

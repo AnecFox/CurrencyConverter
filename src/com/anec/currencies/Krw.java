@@ -1,20 +1,19 @@
 package com.anec.currencies;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Krw {
 
     private static double getRate(String currencyRates) {
-        int index = currencyRates.indexOf("<CharCode>KRW</CharCode>");
+        Pattern pattern = Pattern.compile("<Name>Вон Республики Корея</Name><Value>(.*?)</Value>");
+        Matcher matcher = pattern.matcher(currencyRates);
 
-        int indexOfStartKrwRate = index + 87;
-        int indexOfEndKrwRate = index + 93;
-
-        StringBuilder krwRate = new StringBuilder();
-
-        for (int i = indexOfStartKrwRate; i <= indexOfEndKrwRate; i++) {
-            krwRate.append(currencyRates.charAt(i));
+        if (!matcher.find()) {
+            System.err.println("Pattern is not valid!");
         }
 
-        return Double.parseDouble(String.valueOf(krwRate).replace(',', '.'));
+        return Double.parseDouble(matcher.group(1).replace(',', '.'));
     }
 
     public static double toRubles(double value, String currencyRates) {

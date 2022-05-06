@@ -1,20 +1,19 @@
 package com.anec.currencies;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Bgn {
 
     private static double getRate(String currencyRates) {
-        int index = currencyRates.indexOf("<CharCode>BGN</CharCode>");
+        Pattern pattern = Pattern.compile("<Name>Болгарский лев</Name><Value>(.*?)</Value>");
+        Matcher matcher = pattern.matcher(currencyRates);
 
-        int indexOfStartBgnRate = index + 78;
-        int indexOfEndBgnRate = index + 84;
-
-        StringBuilder bgnRate = new StringBuilder();
-
-        for (int i = indexOfStartBgnRate; i <= indexOfEndBgnRate; i++) {
-            bgnRate.append(currencyRates.charAt(i));
+        if (!matcher.find()) {
+            System.err.println("Pattern is not valid!");
         }
 
-        return Double.parseDouble(String.valueOf(bgnRate).replace(',', '.'));
+        return Double.parseDouble(matcher.group(1).replace(',', '.'));
     }
 
     public static double toRubles(double value, String currencyRates) {

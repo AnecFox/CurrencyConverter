@@ -1,20 +1,19 @@
 package com.anec.currencies;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Cny {
 
     private static double getRate(String currencyRates) {
-        int index = currencyRates.indexOf("<CharCode>CNY</CharCode>");
+        Pattern pattern = Pattern.compile("<Name>Китайский юань</Name><Value>(.*?)</Value>");
+        Matcher matcher = pattern.matcher(currencyRates);
 
-        int indexOfStartCnyRate = index + 78;
-        int indexOfEndCnyRate = index + 84;
-
-        StringBuilder cnyRate = new StringBuilder();
-
-        for (int i = indexOfStartCnyRate; i <= indexOfEndCnyRate; i++) {
-            cnyRate.append(currencyRates.charAt(i));
+        if (!matcher.find()) {
+            System.err.println("Pattern is not valid!");
         }
 
-        return Double.parseDouble(String.valueOf(cnyRate).replace(',', '.'));
+        return Double.parseDouble(matcher.group(1).replace(',', '.'));
     }
 
     public static double toRubles(double value, String currencyRates) {
