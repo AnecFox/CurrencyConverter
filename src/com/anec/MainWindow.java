@@ -55,16 +55,17 @@ public class MainWindow extends JFrame {
         container.add(textFieldResult);
 
         String[] currencies = new String[]{
-                "Болгарский лев (BGN)", "Доллар США (USD)", "Евро (EUR)", "Казахский тенге (KZT)",
-                "Китайский юань (CNY)", "Румынский лей (RON)", "Российский рубль (RUB)",
-                "Украинская гривна (UAH)", "Южнокорейская вона (KRW)", "Японская иена (JPY)"
+                "Болгарский лев (BGN)", "Доллар США (USD)", "Евро (EUR)", "Индийская рупия (INR)",
+                "Казахский тенге (KZT)", "Китайский юань (CNY)", "Польский злотый (PLN)", "Румынский лей (RON)",
+                "Российский рубль (RUB)", "Украинская гривна (UAH)", "Южнокорейская вона (KRW)",
+                "Японская иена (JPY)"
         };
 
         JComboBox<String> comboBoxFirstCurrency = new JComboBox<>(currencies);
-        comboBoxFirstCurrency.setSelectedIndex(1);
+        comboBoxFirstCurrency.setSelectedItem("Доллар США (USD)");
 
         JComboBox<String> comboBoxSecondCurrency = new JComboBox<>(currencies);
-        comboBoxSecondCurrency.setSelectedIndex(6);
+        comboBoxSecondCurrency.setSelectedItem("Российский рубль (RUB)");
 
         container.add(comboBoxFirstCurrency);
         container.add(comboBoxSecondCurrency);
@@ -98,10 +99,14 @@ public class MainWindow extends JFrame {
                         result = Usd.toRubles(Double.parseDouble(value), finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "EUR")) {
                         result = Eur.toRubles(Double.parseDouble(value), finalCurrencyRates);
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "INR")) {
+                        result = Inr.toRubles(Double.parseDouble(value), finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "KZT")) {
                         result = Kzt.toRubles(Double.parseDouble(value), finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "CNY")) {
                         result = Cny.toRubles(Double.parseDouble(value), finalCurrencyRates);
+                    } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "PLN")) {
+                        result = Pln.toRubles(Double.parseDouble(value), finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "RON")) {
                         result = Ron.toRubles(Double.parseDouble(value), finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxFirstCurrency, "UAH")) {
@@ -118,10 +123,14 @@ public class MainWindow extends JFrame {
                         result = Usd.fromRubles(result, finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "EUR")) {
                         result = Eur.fromRubles(result, finalCurrencyRates);
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "INR")) {
+                        result = Inr.fromRubles(result, finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "KZT")) {
                         result = Kzt.fromRubles(result, finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "CNY")) {
                         result = Cny.fromRubles(result, finalCurrencyRates);
+                    } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "PLN")) {
+                        result = Pln.fromRubles(result, finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "RON")) {
                         result = Ron.fromRubles(result, finalCurrencyRates);
                     } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "UAH")) {
@@ -139,10 +148,14 @@ public class MainWindow extends JFrame {
                             result = Usd.fromRubles(Double.parseDouble(value), finalCurrencyRates);
                         } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "EUR")) {
                             result = Eur.fromRubles(Double.parseDouble(value), finalCurrencyRates);
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "INR")) {
+                            result = Inr.fromRubles(Double.parseDouble(value), finalCurrencyRates);
                         } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "KZT")) {
                             result = Kzt.fromRubles(Double.parseDouble(value), finalCurrencyRates);
                         } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "CNY")) {
                             result = Cny.fromRubles(Double.parseDouble(value), finalCurrencyRates);
+                        } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "PLN")) {
+                            result = Pln.fromRubles(Double.parseDouble(value), finalCurrencyRates);
                         } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "RON")) {
                             result = Ron.fromRubles(Double.parseDouble(value), finalCurrencyRates);
                         } else if (Currency.isCurrencySelected(comboBoxSecondCurrency, "UAH")) {
