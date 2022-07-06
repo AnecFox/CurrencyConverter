@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class MainWindow extends JFrame {
 
-    private final static String VERSION = "0.1.7";
+    private final static String VERSION = "0.1.8";
 
     private final JTextField textFieldValue = new JTextField();
     private final JTextField textFieldResult = new JTextField();
