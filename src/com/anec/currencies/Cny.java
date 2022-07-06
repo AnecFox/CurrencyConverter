@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Cny {
 
     private static double getRate(String currencyRates) {
-        Pattern pattern = Pattern.compile("<Name>Китайский юань</Name><Value>(.*?)</Value>");
+        Pattern pattern = Pattern.compile("<Name>Китайских юаней</Name><Value>(.*?)</Value>");
         Matcher matcher = pattern.matcher(currencyRates);
 
         if (!matcher.find()) {
