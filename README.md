@@ -1,5 +1,5 @@
 ## Конвертер валют
 
-### Версия(Version): 0.1.8
+### Версия(Version): 0.1.9
 
 ![CurrencyConverter](program.png)
